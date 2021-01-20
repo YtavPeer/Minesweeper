@@ -1,0 +1,71 @@
+h1 {
+    background-color: slategrey;
+    text-align: center;
+}
+
+.level {
+    background-color: slategrey;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+table {
+    margin: auto;
+    top: 20px;
+}
+
+.mines-body {
+    border: 2px solid black;
+    background-color: gray;
+}
+
+.cell {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.flag {
+    text-align: center;
+}
+
+.mine {
+    background-color: brown;
+}
+
+.negs0 {
+    color: white;
+}
+
+.negs1 {
+    color: blue;
+}
+
+.negs2 {
+    color: green;
+}
+
+.negs3 {
+    color: darkred;
+}
+
+.negs4 {
+    background-color: coral;
+}
+
+.negs5 {
+    background-color: coral;
+}
+
+.negs6 {
+    background-color: coral;
+}
+
+.negs7 {
+    background-color: coral;
+}
+
+.negs8 {
+    background-color: coral;
+}
