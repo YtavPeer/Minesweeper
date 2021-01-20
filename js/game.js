@@ -2,18 +2,22 @@
 
 const MINE = '💣';
 const FLAG = '🚩';
+const NORMAL = '😀';
+const LOSE = '🤯';;
+const WIN = '😎';
 
 //the globals: 1-board-model -- 2- level -- game state
 var gBoard;
 var gLevel = { SIZE: 4, MINES: 2 };
-var gGameState;
+var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 };
+var gameOverTimeOut;
 
 
 function init() {
     console.log('game init');
     gBoard = buildBoard(gLevel.SIZE);
+    gGameState.isOn = true;
     setRandomMines(gLevel);
-    gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 };
     setMinesNegsCount(gBoard);
     renderBoard(gBoard);
 }
@@ -65,9 +69,11 @@ function renderBoard(gboard) {
 
 //get the cell and update the model and after that render the dom
 function cellClicked(el, i, j) {
+    if (gGameState.isOn === false) return
     var cell = gBoard[i][j];
     cell.isShown = true;
     renderCellReveals(cell)
+    checkGameOver(cell);
 }
 
 //function to add the css class and render the cell to the dom with the amount of mine around the cell
@@ -85,6 +91,7 @@ function renderCellReveals(cell) {
 
 //update the model cell to marked and render the dom (add flag class)
 function cellMarked(el, i, j) {
+    if (gGameState.isOn === false) return
     var cell = gBoard[i][j];
     if (cell.isShown) return;
     if (cell.isMarked) {
@@ -97,6 +104,7 @@ function cellMarked(el, i, j) {
     el.classList.toggle('flag');
 }
 
+//update the level and init the game again
 function levelChange(event) {
 
     var boardSize = event.target.value;
@@ -123,5 +131,21 @@ function levelChange(event) {
     }
 
 }
+
+//cheack for game over if we click on mine
+function checkGameOver(cell) {
+    if (cell.isMine) {
+        gGameState.isOn = false
+        gameOverTimeOut = setTimeout(reset, 300)
+    }
+
+}
+
+function reset() {
+    alert('game over');
+    clearTimeout(gameOverTimeOut);
+    gameOverTimeOut = null
+}
+
 
 

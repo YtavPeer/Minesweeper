@@ -1,11 +1,92 @@
-h1 {
-    background-color: slategrey;
+* {
+    box-sizing: border-box;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.7fr 1.6fr 0.7fr;
+    grid-template-rows: 1fr 4fr;
+    gap: 2px 5px;
+    grid-template-areas: ". consol-wrapper ." ". table-wrapper .";
+}
+
+.table-wrapper {
+    grid-area: table-wrapper;
+}
+
+.consol-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". level level level ." "hints score smile time lives" "safe score smile time undo";
+    grid-area: consol-wrapper;
     text-align: center;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
 .level {
+    grid-area: level;
+    background-color: #949494;
+    border: 2px solid black;
+    height: 50px;
+}
+
+.smile {
+    grid-area: smile;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.smile-face{
+    cursor: pointer;
+}
+
+.score {
+    grid-area: score;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.time {
+    grid-area: time;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.lives {
+    grid-area: lives;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.hints {
+    grid-area: hints;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.undo {
+    grid-area: undo;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+.safe {
+    grid-area: safe;
+    background-color: #949494;
+    border: 2px solid black;
+}
+
+h1 {
     background-color: slategrey;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-control {
+    background-color: slategrey;
     margin-bottom: 30px;
 }
 
@@ -20,10 +101,17 @@ table {
 }
 
 .cell {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     font-weight: 800;
+    border: 2px solid black;
+}
+
+.cell:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    background-color: hsl(0, 1%, 30%);
 }
 
 .flag {

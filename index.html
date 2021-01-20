@@ -11,25 +11,49 @@
 
 <body onload="init()">
 
-    <h1>MinesWeeper</h1>
+    <div class="grid-container">
+        <div class="table-wrapper">
+            <div class="table">
+                <table class="mines-table">
+                    <tbody id="table" class="mines-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <div class="level">
-        <form onchange="levelChange(event)">
-            <h4>Choose Your Level:</h4>
-            <input type="radio" id="Easy" name="diff" value="4" checked="checked">
-            <label for="male">easy</label>
-            <input type="radio" id="Medium" name="diff" value="8">
-            <label for="male">Medium</label>
-            <input type="radio" id="Hard" name="diff" value="12">
-            <label for="female">Hard</label>
-        </form>
-    </div>
-
-    <div class="table-wrapper">
-        <table class="mines-table">
-            <tbody id="table" class="mines-body">
-            </tbody>
-        </table>
+        <div class="consol-wrapper">
+            <div class="level">
+                <form onchange="levelChange(event)">
+                    <input type="radio" id="Easy" name="diff" value="4" checked="checked">
+                    <label for="male">easy</label>
+                    <input type="radio" id="Medium" name="diff" value="8">
+                    <label for="male">Medium</label>
+                    <input type="radio" id="Hard" name="diff" value="12">
+                    <label for="female">Hard</label>
+                </form>
+            </div>
+            <div class="smile">
+                <span onclick="init()" class="smile-face">😀</span>
+            </div>
+            <div class="score">
+                <span>score</span>
+            </div>
+            <div class="time">
+                <span>23.958</span>
+            </div>
+            <div class="lives">
+                <span> 2 lives left</span>
+            </div>
+            <div class="hints">
+                <span>3</span>
+            </div>
+            <div class="undo">
+                <span><button>undo</button></span>
+            </div>
+            <div class="safe">
+                <span><button>safe</button></span>
+            </div>
+        </div>
     </div>
 
     <script src="./js/utils.js"></script>
