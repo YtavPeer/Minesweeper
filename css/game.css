@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #c0c0c0;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 0.7fr 1.6fr 0.7fr;
@@ -12,6 +16,7 @@
 
 .table-wrapper {
     grid-area: table-wrapper;
+    margin-top: 20px;
 }
 
 .consol-wrapper {
@@ -24,59 +29,79 @@
     text-align: center;
     height: 100px;
     margin-bottom: 20px;
+    border: 3px #eee;
+    background-color: #c0c0c0;
 }
 
 .level {
     grid-area: level;
     background-color: #949494;
-    border: 2px solid black;
     height: 50px;
+    padding-top: 10px;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
 }
 
 .smile {
     grid-area: smile;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    padding: 10px;
 }
 
-.smile-face{
+.smile-face {
     cursor: pointer;
 }
 
 .score {
     grid-area: score;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    font-family: fantasy;
+    color: #ff000067;
+    padding-top: 20px;
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .time {
     grid-area: time;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    font-family: fantasy;
+    color: #ff000067;
+    padding-top: 20px;
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .lives {
     grid-area: lives;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    font-family: fantasy;
+    color: #ff000067;
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .hints {
     grid-area: hints;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    cursor: pointer;
 }
 
 .undo {
     grid-area: undo;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
 }
 
 .safe {
     grid-area: safe;
-    background-color: #949494;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
 }
 
 h1 {
@@ -90,9 +115,16 @@ h1 {
     margin-bottom: 30px;
 }
 
+button {
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+}
+
 table {
     margin: auto;
     top: 20px;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
 }
 
 .mines-body {
@@ -105,13 +137,15 @@ table {
     height: 40px;
     text-align: center;
     font-weight: 800;
-    border: 2px solid black;
+    border: inset 3px #eee;
+    background-color: #c0c0c0;
+    text-align: center;
 }
 
 .cell:hover {
     opacity: 0.5;
     cursor: pointer;
-    background-color: hsl(0, 1%, 30%);
+    background-color: rgb(199, 195, 195);
 }
 
 .flag {
@@ -123,7 +157,8 @@ table {
 }
 
 .negs0 {
-    color: white;
+    background-color: rgb(99, 99, 99);
+    border: inset 3px #eee;
 }
 
 .negs1 {
@@ -139,21 +174,21 @@ table {
 }
 
 .negs4 {
-    background-color: coral;
+    color: #08103d;
 }
 
 .negs5 {
-    background-color: coral;
+    background-color: rgb(238, 12, 4);
 }
 
 .negs6 {
-    background-color: coral;
+    background-color: rgb(4, 34, 10);
 }
 
 .negs7 {
-    background-color: coral;
+    background-color: rgb(26, 3, 68);
 }
 
 .negs8 {
-    background-color: coral;
+    background-color: rgb(44, 41, 25);
 }
