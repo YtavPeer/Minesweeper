@@ -80,3 +80,45 @@ function updateScore(score) {
     elScore.innerText = score;
 }
 
+//fucntion to reveal the cell for 1 sec
+function revealsNegsCellForSec(el, row, col) {
+
+    for (let i = row - 1; i <= row + 1; i++) {
+        if (i < 0 || i > gBoard.length - 1) continue
+        for (var j = col - 1; j <= col + 1; j++) {
+            if (j < 0 || j > gBoard[0].length - 1) continue
+            var currCell = gBoard[i][j];
+            renderCellReveals(currCell)
+
+
+        }
+    }
+    gHintTimeOut = setTimeout(removeRevealNegsAfterSec, 1000, el, row, col)
+}
+
+//funtion to remove the negs cell shown after 1 sec 
+function removeRevealNegsAfterSec(el, row, col) {
+    for (let i = row - 1; i <= row + 1; i++) {
+        if (i < 0 || i > gBoard.length - 1) continue
+        for (var j = col - 1; j <= col + 1; j++) {
+            if (j < 0 || j > gBoard[0].length - 1) continue
+            var currCell = gBoard[i][j];
+            removeReveals(currCell)
+        }
+    }
+    clearTimeout(gHintTimeOut);
+    gHintTimeOut = null;
+}
+
+//function to remove the shown of cell in the dom only;
+function removeReveals(cell) {
+    var elCell = document.querySelector(`td[data-pos="${cell.pos.i}-${cell.pos.j}"]`)
+    if (cell.isMine === true) {
+        elCell.innerText = '';
+    } else if (cell.minesAroundCount === 0) {
+        elCell.classList.remove(`negs${cell.minesAroundCount}`);
+    } else {
+        elCell.classList.remove(`negs${cell.minesAroundCount}`);
+        elCell.innerText = '';
+    }
+}

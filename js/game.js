@@ -10,11 +10,13 @@ const HINTS = '💡';
 //the globals: 1-board-model -- 2- level -- game state
 var gBoard;
 var gLevel = { SIZE: 4, MINES: 2 };
-var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0 };
+var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0, hintsLeft: 0 };
 var gameOverTimeOut;
 var gTimerStart;
 var gTimeInterval;
 var isFirstMove;
+var isHintOn;
+var gHintTimeOut;
 
 
 function init() {
@@ -25,9 +27,12 @@ function init() {
     gGameState.markedCount = 0;
     gGameState.secsPassed = 0;
     gGameState.livesLeft = 3;
+    gGameState.hintsLeft = 3;
+    isHintOn = false;
     if (gLevel.SIZE === 4) gGameState.livesLeft = 2;
     isFirstMove = true;
     updateScore(gLevel.MINES);
+    getLocalStoarge()
     updateLive(gGameState.livesLeft);
     renderBoard(gBoard);
 
@@ -83,6 +88,11 @@ function cellClicked(el, i, j) {
     var cell = gBoard[i][j];
     if (gGameState.isOn === false) return
     if (cell.isMarked === true) return
+    if (isHintOn) {
+        revealsNegsCellForSec(el, i, j);
+        isHintOn = false;
+        return;
+    }
 
     cell.isShown = true;
     gGameState.shownCount++;
@@ -224,6 +234,9 @@ function checkVictory() {
             console.log(gBoard);
             if ((cell.isMine === true && gBoard[i][j].isMarked === true) || (cell.isMine === false && cell.isShown === true)) {
                 continue
+            } else if (((cell.isMine === true && gBoard[i][j].isMarked === false && gGameState.livesLeft > 0)
+                || (cell.isMine === false && cell.isShown === true)) && (cell.isMarked === true || cell.isShown === true)) {
+                continue
             } else {
                 return;
             }
@@ -233,6 +246,7 @@ function checkVictory() {
     stopTime()
     var elSmile = document.querySelector('.smile span');
     elSmile.innerText = WIN;
+    updateLocalStorage()
 }
 
 //open all the mines if game over
@@ -274,6 +288,87 @@ function updateLive(liveRemain) {
     //render the dom
     var elLive = document.querySelector('.lives span')
     elLive.innerText = `${gGameState.livesLeft} lives left`;
+}
+
+//updae the local storage with best score
+function updateLocalStorage() {
+    //adding to local storage
+    var level = gLevel.SIZE;
+    //update the game state
+    switch (level) {
+        case 4:
+            var currBest = localStorage.getItem("bestScoreEasy")
+            if (!currBest) localStorage.setItem("bestScoreEasy", `${gGameState.secsPassed}`);
+            if (gGameState.secsPassed < currBest) {
+                localStorage.setItem("bestScoreEasy", `${gGameState.secsPassed}`);
+            }
+            break;
+        case 8:
+            var currBest = localStorage.getItem("bestScoreMedium")
+            if (!currBest) localStorage.setItem("bestScoreMedium", `${gGameState.secsPassed}`);
+            if (gGameState.secsPassed < currBest) {
+                localStorage.setItem("bestScoreMedium", `${gGameState.secsPassed}`);
+            }
+            break;
+        case 12:
+            var currBest = localStorage.getItem("bestScoreHard")
+            if (!currBest) localStorage.setItem("bestScoreHard", `${gGameState.secsPassed}`);
+            if (gGameState.secsPassed < currBest) {
+                localStorage.setItem("bestScoreHard", `${gGameState.secsPassed}`);
+            }
+            break;
+        default:
+            break;
+    }
+
+
+}
+
+//function to get best local storage according to the level
+function getLocalStoarge() {
+    //adding to local storage
+    var level = gLevel.SIZE;
+    var elBestScore = document.querySelector('.time p')
+    //update the game state
+    switch (level) {
+        case 4:
+            var currBest = localStorage.getItem("bestScoreEasy")
+            if (!currBest) {
+                elBestScore.innerText = 'First game';
+            } else {
+                elBestScore.innerText = `Best Score: ${currBest}`;
+            }
+            break;
+        case 8:
+            var currBest = localStorage.getItem("bestScoreMedium")
+            if (!currBest) {
+                elBestScore.innerText = 'First game';
+            } else {
+                elBestScore.innerText = `Best Score: ${currBest}`
+            }
+            break;
+        case 12:
+            var currBest = localStorage.getItem("bestScoreHard")
+            if (!currBest) {
+                elBestScore.innerText = 'First game';
+            } else {
+                elBestScore.innerText = `Best Score: ${currBest}`
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+//function to toggle the hint and put the hint count down
+function hint() {
+    if (gGameState.hintsLeft > 0) {
+        isHintOn = true;
+        gGameState.hintsLeft--;
+        alert(`${gGameState.hintsLeft} Left`)
+    } else {
+        alert(` You dont have more Hints`)
+    }
 }
 
 

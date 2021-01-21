@@ -4,6 +4,9 @@
 
 body {
     background-color: #c0c0c0;
+    background-image: url('../assets/main.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .grid-container {
@@ -12,6 +15,7 @@ body {
     grid-template-rows: 1fr 4fr;
     gap: 2px 5px;
     grid-template-areas: ". consol-wrapper ." ". table-wrapper .";
+    padding-top: 20px;
 }
 
 .table-wrapper {
@@ -70,8 +74,11 @@ body {
     background-color: #c0c0c0;
     font-family: fantasy;
     color: #ff000067;
-    padding-top: 20px;
     font-weight: 900;
+    font-size: 20px;
+}
+
+.time p {
     font-size: 20px;
 }
 
@@ -102,12 +109,6 @@ body {
     grid-area: safe;
     border: inset 3px #eee;
     background-color: #c0c0c0;
-}
-
-h1 {
-    background-color: slategrey;
-    margin: 0;
-    padding: 0;
 }
 
 .main-control {
@@ -178,17 +179,17 @@ table {
 }
 
 .negs5 {
-    background-color: rgb(238, 12, 4);
+    color: rgb(238, 12, 4);
 }
 
 .negs6 {
-    background-color: rgb(4, 34, 10);
+    color: rgb(4, 34, 10);
 }
 
 .negs7 {
-    background-color: rgb(26, 3, 68);
+    color: rgb(26, 3, 68);
 }
 
 .negs8 {
-    background-color: rgb(44, 41, 25);
+    color: rgb(44, 41, 25);
 }

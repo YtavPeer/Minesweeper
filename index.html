@@ -27,7 +27,7 @@
             <div class="level">
                 <form onchange="levelChange(event)">
                     <input class="form-check-input" type="radio" id="Easy" name="diff" value="4" checked="checked">
-                    <label  for="male">easy</label>
+                    <label for="male">easy</label>
                     <input class="form-check-input" type="radio" id="Medium" name="diff" value="8">
                     <label for="male">Medium</label>
                     <input class="form-check-input" type="radio" id="Hard" name="diff" value="12">
@@ -42,13 +42,13 @@
             </div>
             <div class="time">
                 <span></span>
+                <p></p>
             </div>
             <div class="lives">
                 <span> 2 lives left</span>
             </div>
             <div class="hints">
-                <span>💡 💡 💡</span>;
-
+                <span onclick="hint()">💡 💡 💡</span>
             </div>
             <div class="undo">
                 <span><button type="button" class="btn btn-danger btn-sm">Undo</button></span>
