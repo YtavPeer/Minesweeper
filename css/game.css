@@ -149,6 +149,17 @@ table {
     background-color: rgb(199, 195, 195);
 }
 
+.safe-cell {
+    background-color: limegreen;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 .flag {
     text-align: center;
 }
@@ -158,8 +169,9 @@ table {
 }
 
 .negs0 {
-    background-color: rgb(99, 99, 99);
-    border: inset 3px #eee;
+    background-color: hsla(0, 1%, 58%, 0.082);
+    border: inset 3px rgba(237, 237, 237, 0.945);
+    
 }
 
 .negs1 {

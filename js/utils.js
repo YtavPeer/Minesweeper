@@ -90,7 +90,6 @@ function revealsNegsCellForSec(el, row, col) {
             var currCell = gBoard[i][j];
             renderCellReveals(currCell)
 
-
         }
     }
     gHintTimeOut = setTimeout(removeRevealNegsAfterSec, 1000, el, row, col)
@@ -122,3 +121,29 @@ function removeReveals(cell) {
         elCell.innerText = '';
     }
 }
+
+//func to mark random cell without mine for few sec
+function markRandomForFewSec() {
+    //get random cell which is not mine till we have one
+    var randomCell;
+    var randomRow = getRandomInt(0, gLevel.SIZE);
+    var randomCol = getRandomInt(0, gLevel.SIZE);
+    if (gBoard[randomRow][randomCol].isMine === false && gBoard[randomRow][randomCol].isShown === false) {
+        randomCell = gBoard[randomRow][randomCol];
+    } else markRandomForFewSec()
+
+    //revael the random cell- add class
+    var Cell = document.querySelector(`td[data-pos="${randomCell.pos.i}-${randomCell.pos.j}"]`)
+    Cell.classList.add(`safe-cell`);
+    gSafeTimeOut = setTimeout(removeRandomSafe, 5000, randomCell);
+}
+
+//remove the revael of random cell- remove the class class
+function removeRandomSafe(randomCell) {
+    var Cell = document.querySelector(`td[data-pos="${randomCell.pos.i}-${randomCell.pos.j}"]`)
+    Cell.classList.remove(`safe-cell`);
+    clearTimeout(gSafeTimeOut);
+    gSafeTimeOut = null;
+}
+
+

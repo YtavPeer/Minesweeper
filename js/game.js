@@ -10,13 +10,15 @@ const HINTS = '💡';
 //the globals: 1-board-model -- 2- level -- game state
 var gBoard;
 var gLevel = { SIZE: 4, MINES: 2 };
-var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0, hintsLeft: 0 };
+var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0, hintsLeft: 0, safeClickLeft: 0 };
 var gameOverTimeOut;
 var gTimerStart;
 var gTimeInterval;
 var isFirstMove;
 var isHintOn;
+var isSafeOn;
 var gHintTimeOut;
+var gSafeTimeOut;
 
 
 function init() {
@@ -28,7 +30,9 @@ function init() {
     gGameState.secsPassed = 0;
     gGameState.livesLeft = 3;
     gGameState.hintsLeft = 3;
+    gGameState.safeClickLeft = 3;
     isHintOn = false;
+    isSafeOn = false;
     if (gLevel.SIZE === 4) gGameState.livesLeft = 2;
     isFirstMove = true;
     updateScore(gLevel.MINES);
@@ -93,6 +97,7 @@ function cellClicked(el, i, j) {
         isHintOn = false;
         return;
     }
+
 
     cell.isShown = true;
     gGameState.shownCount++;
@@ -167,7 +172,6 @@ function levelChange(event) {
         case '4':
             console.log('change to 4');
             gLevel = { SIZE: 4, MINES: 2 };
-
             newGame()
             break;
         case '8':
@@ -365,11 +369,30 @@ function hint() {
     if (gGameState.hintsLeft > 0) {
         isHintOn = true;
         gGameState.hintsLeft--;
-        alert(`${gGameState.hintsLeft} Left`)
+        alert(`${gGameState.hintsLeft} Hint Left`)
     } else {
         alert(` You dont have more Hints`)
     }
 }
+
+//function to toggle the hint and put the hint count down
+function safeClick() {
+    if (gGameState.safeClickLeft > 0 && !gSafeTimeOut) {
+        isSafeOn = true;
+        gGameState.safeClickLeft--;
+        alert(`${gGameState.safeClickLeft} Safe Left`)
+    } else {
+        alert(` You dont have more Safe or you are already using safe cell`)
+        return;
+    }
+
+    if (isSafeOn) {
+        markRandomForFewSec()
+        isSafeOn = false;
+        return;
+    }
+}
+
 
 
 
