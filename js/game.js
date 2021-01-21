@@ -98,6 +98,8 @@ function cellClicked(el, i, j) {
         return;
     }
 
+    if (cell.isShown && cell.isMine) return;
+
 
     cell.isShown = true;
     gGameState.shownCount++;
@@ -129,6 +131,7 @@ function renderCellReveals(cell) {
     var elCell = document.querySelector(`td[data-pos="${cell.pos.i}-${cell.pos.j}"]`)
     if (cell.isMine === true) {
         elCell.innerText = MINE;
+        elCell.classList.add('mine-game');
     } else if (cell.minesAroundCount === 0) {
         elCell.classList.add(`negs${cell.minesAroundCount}`);
     } else {
@@ -201,8 +204,9 @@ function checkGameOver(cell) {
         gGameState.isOn = false
         gameOverTimeOut = setTimeout(resetMeassage, 300)
         var elCell = document.querySelector(`td[data-pos="${cell.pos.i}-${cell.pos.j}"]`)
-        elCell.classList.add('mine');
         revealAllMines();
+        elCell.classList.remove('mine-game');
+        elCell.classList.add('mine-game-over');
         stopTime()
         var elSmile = document.querySelector('.smile span');
         elSmile.innerText = LOSE;

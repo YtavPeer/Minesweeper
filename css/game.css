@@ -3,11 +3,12 @@
 }
 
 body {
-    background-color: #c0c0c0;
-    background-image: url('../assets/main.jpg');
+    background-image: url('../assets/main6.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 
 .grid-container {
     display: grid;
@@ -39,7 +40,6 @@ body {
 
 .level {
     grid-area: level;
-    background-color: #949494;
     height: 50px;
     padding-top: 10px;
     border: inset 3px #eee;
@@ -112,20 +112,12 @@ body {
 }
 
 .main-control {
-    background-color: slategrey;
     margin-bottom: 30px;
-}
-
-button {
-    border: inset 3px #eee;
-    background-color: #c0c0c0;
 }
 
 table {
     margin: auto;
     top: 20px;
-    border: inset 3px #eee;
-    background-color: #c0c0c0;
 }
 
 .mines-body {
@@ -139,14 +131,17 @@ table {
     text-align: center;
     font-weight: 800;
     border: inset 3px #eee;
-    background-color: #c0c0c0;
+    background-color: hsla(0, 1%, 58%, 0.082);
     text-align: center;
+    -moz-box-shadow: inset 0 0 5px #CCC;
+    -webkit-box-shadow: inset 0 0 5px #CCC;
+    box-shadow: inset 0 0 5px #CCC;
 }
 
 .cell:hover {
     opacity: 0.5;
     cursor: pointer;
-    background-color: rgb(199, 195, 195);
+    background-color: #c0c0c0;
 }
 
 .safe-cell {
@@ -164,44 +159,55 @@ table {
     text-align: center;
 }
 
-.mine {
+.mine-game-over {
     background-color: brown;
 }
 
+.mine-game{
+    background-color: #c0c0c0;
+}
+
 .negs0 {
-    background-color: hsla(0, 1%, 58%, 0.082);
+    background-color: #c0c0c0;
     border: inset 3px rgba(237, 237, 237, 0.945);
-    
 }
 
 .negs1 {
+    background-color: #c0c0c0;
     color: blue;
 }
 
 .negs2 {
+    background-color: #c0c0c0;
     color: green;
 }
 
 .negs3 {
+    background-color: #c0c0c0;
     color: darkred;
 }
 
 .negs4 {
+    background-color: #c0c0c0;
     color: #08103d;
 }
 
 .negs5 {
+    background-color: #c0c0c0;
     color: rgb(238, 12, 4);
 }
 
 .negs6 {
+    background-color: #c0c0c0;
     color: rgb(4, 34, 10);
 }
 
 .negs7 {
+    background-color: #c0c0c0;
     color: rgb(26, 3, 68);
 }
 
 .negs8 {
+    background-color: #c0c0c0;
     color: rgb(44, 41, 25);
 }
