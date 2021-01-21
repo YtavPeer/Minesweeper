@@ -51,12 +51,27 @@
                 <span onclick="hint()">💡 💡 💡</span>
             </div>
             <div class="undo">
-                <span><button type="button" class="btn btn-danger btn-sm">Undo</button></span>
+                <span><select onchange="scatteringMine(event)" class="form-select form-select-sm"
+                        aria-label=".form-select-sm example">
+                        <option selected>mine select</option>
+                        <option value="random">Random mine</option>
+                        <option value="user">User Choose</option>
+
+                    </select></span>
             </div>
             <div class="safe">
                 <span><button onclick="safeClick()" type="button" class="btn btn-info btn-sm">safe</button></span>
             </div>
         </div>
+    </div>
+
+    <div class="setMine">
+        <h2>Please Choose the Mine</h2>
+        <table>
+            <tbody>
+            </tbody>
+        </table>
+        <button onclick="finish()" type="button" class="btn btn-danger btn-sm">Finish Set</button>
     </div>
 
     <script src="./js/utils.js"></script>

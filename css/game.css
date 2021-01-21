@@ -8,8 +8,6 @@ body {
     background-size: cover;
 }
 
-
-
 .grid-container {
     display: grid;
     grid-template-columns: 0.7fr 1.6fr 0.7fr;
@@ -163,7 +161,7 @@ table {
     background-color: brown;
 }
 
-.mine-game{
+.mine-game {
     background-color: #c0c0c0;
 }
 
@@ -211,3 +209,19 @@ table {
     background-color: #c0c0c0;
     color: rgb(44, 41, 25);
 }
+
+.setMine {
+    position: absolute;
+    top: 200px;
+    left: 35%;
+    border: 5px solid gray;
+    margin: 5px;
+    padding: 5px;
+    background-color: deepskyblue;
+    display: none;
+}
+
+.open{
+    display: block;
+}
+

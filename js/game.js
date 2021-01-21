@@ -10,7 +10,7 @@ const HINTS = '💡';
 //the globals: 1-board-model -- 2- level -- game state
 var gBoard;
 var gLevel = { SIZE: 4, MINES: 2 };
-var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0, hintsLeft: 0, safeClickLeft: 0 };
+var gGameState = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, livesLeft: 0, hintsLeft: 0, safeClickLeft: 0, isRandomMine: true };
 var gameOverTimeOut;
 var gTimerStart;
 var gTimeInterval;
@@ -39,7 +39,6 @@ function init() {
     getLocalStoarge()
     updateLive(gGameState.livesLeft);
     renderBoard(gBoard);
-
 }
 
 //this func get size of board and build the board model
@@ -100,7 +99,6 @@ function cellClicked(el, i, j) {
 
     if (cell.isShown && cell.isMine) return;
 
-
     cell.isShown = true;
     gGameState.shownCount++;
     //handle start time
@@ -111,7 +109,11 @@ function cellClicked(el, i, j) {
 
     if (isFirstMove) {
         cell.minesAroundCount = 0;
-        setRandomMines(i, j);
+        if (gGameState.isRandomMine) {
+            setRandomMines(i, j);
+        } else {
+            userSetMine();
+        }
         setMinesNegsCount(gBoard);
         isFirstMove = false;
     }
@@ -169,21 +171,17 @@ function cellMarked(el, i, j) {
 function levelChange(event) {
 
     var boardSize = event.target.value;
-    console.log(boardSize);
     //update the game state
     switch (boardSize) {
         case '4':
-            console.log('change to 4');
             gLevel = { SIZE: 4, MINES: 2 };
             newGame()
             break;
         case '8':
-            console.log('change to 8');
             gLevel = { SIZE: 8, MINES: 12 };
             newGame()
             break;
         case '12':
-            console.log('change to 12');
             gLevel = { SIZE: 12, MINES: 30 };
             newGame()
             break;
@@ -238,8 +236,6 @@ function checkVictory() {
         for (let j = 0; j < gBoard.length; j++) {
             var cell = gBoard[i][j];
             count++;
-            console.log('cnt=', count);
-            console.log(gBoard);
             if ((cell.isMine === true && gBoard[i][j].isMarked === true) || (cell.isMine === false && cell.isShown === true)) {
                 continue
             } else if (((cell.isMine === true && gBoard[i][j].isMarked === false && gGameState.livesLeft > 0)
@@ -271,7 +267,6 @@ function revealAllMines() {
 
 //when we got cell with 0 mine negs- we reveal all negs (render the dom)
 function expandShown(cell) {
-    console.log('need to expand')
     var pos = cell.pos;
     for (let i = pos.i - 1; i <= pos.i + 1; i++) {
         if (i < 0 || i > gBoard.length - 1) continue
@@ -397,6 +392,23 @@ function safeClick() {
     }
 }
 
+//function to change the state of scattering mine (user/ randomly)
+function scatteringMine(event) {
+    var choose = event.target.value;
+    gGameState.isRandomMine = (choose === 'random') ? true : false;
+    newGame();
+}
+
+//func to get the user set mine and change the modal of mine
+function changeMineModel(td, i, j) {
+    var isUserWantMine = td.checked
+    //update the model
+    gBoard[i][j].isMine = isUserWantMine
+
+    //update the model set count
+    setMinesNegsCount(gBoard);
+
+}
 
 
 

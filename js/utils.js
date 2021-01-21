@@ -114,6 +114,7 @@ function removeReveals(cell) {
     var elCell = document.querySelector(`td[data-pos="${cell.pos.i}-${cell.pos.j}"]`)
     if (cell.isMine === true) {
         elCell.innerText = '';
+        elCell.classList.remove(`mine-game`);
     } else if (cell.minesAroundCount === 0) {
         elCell.classList.remove(`negs${cell.minesAroundCount}`);
     } else {
@@ -125,25 +126,54 @@ function removeReveals(cell) {
 //func to mark random cell without mine for few sec
 function markRandomForFewSec() {
     //get random cell which is not mine till we have one
-    var randomCell;
+
     var randomRow = getRandomInt(0, gLevel.SIZE);
     var randomCol = getRandomInt(0, gLevel.SIZE);
     if (gBoard[randomRow][randomCol].isMine === false && gBoard[randomRow][randomCol].isShown === false) {
-        randomCell = gBoard[randomRow][randomCol];
-    } else markRandomForFewSec()
-
-    //revael the random cell- add class
-    var Cell = document.querySelector(`td[data-pos="${randomCell.pos.i}-${randomCell.pos.j}"]`)
-    Cell.classList.add(`safe-cell`);
-    gSafeTimeOut = setTimeout(removeRandomSafe, 5000, randomCell);
+        var random = gBoard[randomRow][randomCol];
+        //revael the random cell- add class
+        var elChooseCell = document.querySelector(`td[data-pos="${random.pos.i}-${random.pos.j}"]`)
+        elChooseCell.classList.add(`safe-cell`);
+        gSafeTimeOut = setTimeout(removeRandomSafe, 5000, random);
+    } else {
+        markRandomForFewSec();
+    }
 }
 
 //remove the revael of random cell- remove the class class
-function removeRandomSafe(randomCell) {
-    var Cell = document.querySelector(`td[data-pos="${randomCell.pos.i}-${randomCell.pos.j}"]`)
-    Cell.classList.remove(`safe-cell`);
+function removeRandomSafe(randomPos) {
+    var elChoose = document.querySelector(`td[data-pos="${randomPos.pos.i}-${randomPos.pos.j}"]`)
+    elChoose.classList.remove(`safe-cell`);
     clearTimeout(gSafeTimeOut);
     gSafeTimeOut = null;
 }
 
+//func to give to the user to option to choose random mine
+function userSetMine() {
+    var strHTML = '';
+    for (var i = 0; i < gBoard.length; i++) {
+        strHTML += `<tr>`
+        for (var j = 0; j < gBoard[0].length; j++) {
+            //get cell model and option to update class/ inner text in advance- for now not in use
+            strHTML += `<td>
+            <div class="form-check">
+            <input data-pos="${i}-${j}" onchange="changeMineModel(this, ${i}, ${j})"  class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>  
+                </td>\t`
+        }
+        strHTML += `</tr>\n`
+    }
+    var elmines = document.querySelector('.setMine tbody');
+    elmines.innerHTML = strHTML;
+
+    var elModal = document.querySelector('.setMine');
+    elModal.classList.add('open');
+    return;
+}
+
+//func to close the modal
+function finish() {
+    var elModal = document.querySelector('.setMine');
+    elModal.classList.remove('open');
+}
 
