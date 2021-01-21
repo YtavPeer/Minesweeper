@@ -111,8 +111,6 @@ function cellClicked(el, i, j) {
         cell.minesAroundCount = 0;
         if (gGameState.isRandomMine) {
             setRandomMines(i, j);
-        } else {
-            userSetMine();
         }
         setMinesNegsCount(gBoard);
         isFirstMove = false;

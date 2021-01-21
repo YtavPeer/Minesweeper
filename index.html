@@ -36,6 +36,7 @@
             </div>
             <div class="smile">
                 <span onclick="newGame()" class="smile-face">😀</span>
+                <button onclick="userSetMine()" type="button" class="btn btn-info btn-sm">Set Mine</button>
             </div>
             <div class="score">
                 <span>score</span>
@@ -53,8 +54,7 @@
             <div class="undo">
                 <span><select onchange="scatteringMine(event)" class="form-select form-select-sm"
                         aria-label=".form-select-sm example">
-                        <option selected>mine select</option>
-                        <option value="random">Random mine</option>
+                        <option selected value="random">Random mine</option>
                         <option value="user">User Choose</option>
 
                     </select></span>

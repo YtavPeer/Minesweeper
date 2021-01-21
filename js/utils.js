@@ -150,6 +150,14 @@ function removeRandomSafe(randomPos) {
 
 //func to give to the user to option to choose random mine
 function userSetMine() {
+    if (gGameState.isRandomMine === true) {
+        alert('Please Select user choose mine for use this Buttom or you can click the smiley and start play')
+        return;
+    }
+    if (gGameState.isOn === false) {
+        alert('Need to restart the game click on the smiley to restart and after that put again mine in set mine buttom')
+        return;
+    }
     var strHTML = '';
     for (var i = 0; i < gBoard.length; i++) {
         strHTML += `<tr>`
@@ -175,5 +183,6 @@ function userSetMine() {
 function finish() {
     var elModal = document.querySelector('.setMine');
     elModal.classList.remove('open');
+    // newGame();
 }
 
